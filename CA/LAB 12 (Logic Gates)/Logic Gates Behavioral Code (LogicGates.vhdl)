@@ -1,0 +1,23 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity LogicGates is
+    Port ( a : in  STD_LOGIC;
+           b : in  STD_LOGIC;
+           y_and : out  STD_LOGIC;
+           y_or : out  STD_LOGIC;
+           y_not : out  STD_LOGIC);
+end LogicGates;
+
+architecture Behavioral of LogicGates is
+begin
+    -- AND gate
+    y_and <= a and b;
+    
+    -- OR gate
+    y_or <= a or b;
+    
+    -- NOT gate
+    y_not <= not a;
+    
+end Behavioral;

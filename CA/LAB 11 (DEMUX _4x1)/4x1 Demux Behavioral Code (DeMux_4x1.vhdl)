@@ -1,0 +1,17 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity DeMux_4x1 is
+    Port ( I : in  STD_LOGIC;
+           S : in  STD_LOGIC_VECTOR (1 downto 0);
+           O : out  STD_LOGIC_VECTOR (3 downto 0));
+end DeMux_4x1;
+
+architecture Behavioral of DeMux_4x1 is
+begin
+    O(0) <= (I AND NOT S(0) AND NOT S(1));
+    O(1) <= (I AND NOT S(0) AND S(1));
+    O(2) <= (I AND S(0) AND NOT S(1));
+    O(3) <= (I AND S(0) AND S(1));
+end Behavioral;
+

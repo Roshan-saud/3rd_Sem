@@ -1,0 +1,42 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY DeMux_4x1_TB IS
+END DeMux_4x1_TB;
+
+ARCHITECTURE behavior OF DeMux_4x1_TB IS  
+  
+    COMPONENT DeMux_4x1
+    PORT(
+         I : IN  std_logic;
+         S : IN  std_logic_vector(1 downto 0);
+         O : OUT  std_logic_vector(3 downto 0)
+        );
+    END COMPONENT;
+    
+    -- Inputs
+    signal I : std_logic := '0';
+    signal S : std_logic_vector(1 downto 0) := (others => '0');
+    
+    -- Outputs
+    signal O : std_logic_vector(3 downto 0);
+
+BEGIN 
+    -- Instantiate the 4x1 Demux component
+    uut: DeMux_4x1 PORT MAP (
+          I => I,
+          S => S,
+          O => O
+        );
+
+   -- Stimulus process
+   stim_proc: process
+   begin
+        I <= '1'; S(0) <= '0'; S(1) <= '0'; wait for 100 ns;
+        S(0) <= '0'; S(1) <= '1'; wait for 100 ns;
+        S(0) <= '1'; S(1) <= '0'; wait for 100 ns;
+        S(0) <= '1'; S(1) <= '1'; wait for 100 ns;
+        wait;
+   end process;
+
+END;

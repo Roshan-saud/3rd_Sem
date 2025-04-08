@@ -1,0 +1,48 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY LogicGates_TB IS
+END LogicGates_TB;
+
+ARCHITECTURE behavior OF LogicGates_TB IS  
+  
+    COMPONENT LogicGates
+    PORT(
+         a : IN  std_logic;
+         b : IN  std_logic;
+         y_and : OUT  std_logic;
+         y_or : OUT  std_logic;
+         y_not : OUT  std_logic
+        );
+    END COMPONENT;
+    
+    -- Inputs
+    signal a : std_logic := '0';
+    signal b : std_logic := '0';
+    
+    -- Outputs
+    signal y_and : std_logic;
+    signal y_or : std_logic;
+    signal y_not : std_logic;
+
+BEGIN 
+    -- Instantiate the Logic Gates component
+    uut: LogicGates PORT MAP (
+          a => a,
+          b => b,
+          y_and => y_and,
+          y_or => y_or,
+          y_not => y_not
+        );
+
+   -- Stimulus process
+   stim_proc: process
+   begin
+        a <= '0'; b <= '0'; wait for 100 ns;
+        a <= '0'; b <= '1'; wait for 100 ns;
+        a <= '1'; b <= '0'; wait for 100 ns;
+        a <= '1'; b <= '1'; wait for 100 ns;
+        wait;
+   end process;
+
+END;

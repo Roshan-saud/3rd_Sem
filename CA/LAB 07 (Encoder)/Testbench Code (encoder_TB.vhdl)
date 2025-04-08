@@ -1,0 +1,40 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY encoder_TB IS
+END encoder_TB;
+
+ARCHITECTURE behavior OF encoder_TB IS 
+  
+    COMPONENT encoder
+    PORT(
+         A : IN  std_logic_vector(3 downto 0);
+         B : OUT  std_logic_vector(1 downto 0)
+        );
+    END COMPONENT;
+    
+    -- Inputs
+    signal A : std_logic_vector(3 downto 0) := (others => '0');
+    
+    -- Outputs
+    signal B : std_logic_vector(1 downto 0);
+
+BEGIN
+    -- Instantiate the encoder component
+    uut: encoder PORT MAP (
+          A => A,
+          B => B
+        );
+    
+    -- Stimulus process
+    stim_proc: process
+    begin
+        A <= "0000"; wait for 100 ns;
+        A <= "0001"; wait for 100 ns;
+        A <= "0010"; wait for 100 ns;
+        A <= "0100"; wait for 100 ns;
+        A <= "1000"; wait for 100 ns;
+        wait;
+    end process;
+
+END;

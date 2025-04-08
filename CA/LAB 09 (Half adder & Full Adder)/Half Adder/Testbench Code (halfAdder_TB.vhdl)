@@ -1,0 +1,45 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY halfAdder_TB IS
+END halfAdder_TB;
+
+ARCHITECTURE behavior OF halfAdder_TB IS 
+  
+    COMPONENT HA_and_FA
+    PORT(
+         A : IN  std_logic;
+         B : IN  std_logic;
+         SUM : OUT  std_logic;
+         CARRY : OUT  std_logic
+        );
+    END COMPONENT;
+    
+    -- Inputs
+    signal A : std_logic := '0';
+    signal B : std_logic := '0';
+    
+    -- Outputs
+    signal SUM : std_logic;
+    signal CARRY : std_logic;
+
+BEGIN
+    -- Instantiate the half adder component
+    uut: HA_and_FA PORT MAP (
+          A => A,
+          B => B,
+          SUM => SUM,
+          CARRY => CARRY
+        );
+    
+    -- Stimulus process
+    stim_proc: process
+    begin
+        A <= '0'; B <= '0'; wait for 100 ns;
+        A <= '0'; B <= '1'; wait for 100 ns;
+        A <= '1'; B <= '0'; wait for 100 ns;
+        A <= '1'; B <= '1'; wait for 100 ns;
+        wait;
+    end process;
+
+END;

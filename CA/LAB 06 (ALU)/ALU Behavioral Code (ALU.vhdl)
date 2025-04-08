@@ -1,0 +1,22 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity ALU is
+    Port (  A : in  STD_LOGIC_VECTOR (3 downto 0);
+           B : in  STD_LOGIC_VECTOR (3 downto 0);
+           SEL : in  STD_LOGIC_VECTOR (3 downto 0);
+           Y : out  STD_LOGIC_VECTOR (3 downto 0));
+end ALU;
+
+architecture Behavioral of ALU is
+begin
+    process(A, B, SEL)
+    begin
+        case SEL is
+            when "0000" => Y <= A and B;
+            when "0001" => Y <= A nand B;
+            when "0010" => Y <= A or B;
+            when others => Y <= (others => 'Z'); -- Undefined or high-impedance
+        end case;
+    end process;
+end Behavioral;

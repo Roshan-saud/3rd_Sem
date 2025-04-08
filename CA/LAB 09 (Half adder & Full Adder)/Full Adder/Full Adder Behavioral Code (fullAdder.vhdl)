@@ -1,0 +1,16 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity fullAdder is
+    Port ( A : in  STD_LOGIC;
+           B : in  STD_LOGIC;
+           Cin : in  STD_LOGIC;
+           SUM : out  STD_LOGIC;
+           Cout : out  STD_LOGIC);
+end fullAdder;
+
+architecture Behavioral of fullAdder is
+begin
+    SUM <= A XOR B XOR Cin;
+    Cout <= (A AND B) OR (B AND Cin) OR (Cin AND A);
+end Behavioral;

@@ -1,0 +1,52 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY ALU_TB IS
+END ALU_TB;
+
+ARCHITECTURE behavior OF ALU_TB IS  
+    COMPONENT ALU
+    PORT(
+         A : IN  std_logic_vector(3 downto 0);
+         B : IN  std_logic_vector(3 downto 0);
+         SEL : IN  std_logic_vector(3 downto 0);
+         Y : OUT  std_logic_vector(3 downto 0)
+        );
+    END COMPONENT;
+    
+    -- Inputs
+    signal A : std_logic_vector(3 downto 0) := (others => '0');
+    signal B : std_logic_vector(3 downto 0) := (others => '0');
+    signal SEL : std_logic_vector(3 downto 0) := (others => '0');
+    
+    -- Outputs
+    signal Y : std_logic_vector(3 downto 0);
+
+BEGIN
+    -- Instantiate the ALU component
+    uut: ALU PORT MAP (
+          A => A,
+          B => B,
+          SEL => SEL,
+          Y => Y
+        ); 
+    
+    -- Stimulus process
+    stim_proc: process
+    begin		
+        A <= "0101"; B <= "0101";
+        SEL <= "0000"; wait for 100 ns;	
+		
+        SEL <= "0001"; wait for 100 ns;	
+		
+        SEL <= "0010"; wait for 100 ns;	
+		
+        A <= "1101"; B <= "1101";
+        SEL <= "0000"; wait for 100 ns;	
+		
+        SEL <= "0001"; wait for 100 ns;	
+        SEL <= "0010"; wait for 100 ns;	
+        wait;
+    end process;
+
+END;
